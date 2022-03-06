@@ -1,0 +1,7 @@
+<div>
+    {% for c in cont %}
+        <p><a href="{% url 'restaurant' c.uid %}">
+            {{c.hotel}}  {{c.city}}  {{c.phone}}
+        </a></p>
+    {% endfor %}
+</div>

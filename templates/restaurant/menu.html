@@ -1,0 +1,29 @@
+<div class="sub">
+    {% for cont in contents %}
+            <div >
+                
+                    <p>
+                    {{ cont.item }}  Rs {{ cont.price }}
+                    </p>
+                    
+                    
+            </div>
+    {% endfor %}
+</div>
+<form action="{% url 'restindex' %}" method="POST">
+    {% csrf_token %}
+        
+        <div>
+            <label for="Item">Item</label>
+            <input type="text" name='item' required>
+        </div>
+        <div>
+            <label for="Price">Price</label>
+            <input type="text" name='price' required>
+        </div>
+        
+    
+        <input type="submit" value="Add Item">
+    </form>
+    <a href="{% url 'restaddress' %}">Address </a>
+    <a href="{% url 'order' %}">order </a>

@@ -1,0 +1,33 @@
+<div>
+    <form action="{% url 'restaddress' %}" method="POST">
+    {% csrf_token %}
+        <div>
+            <label for="Hotel">Hotel: </label>
+            <input type="text" name='Hotel' value="{{ cont.hotel}}" required>
+        </div>
+        <div>
+            <label for="Address_1">Address 1: </label>
+            <input type="text" name='Address_1' value="{{ cont.address_1 }}" required>
+        </div>
+        <div>
+            <label for="Address_2">Address 2: </label>
+            <input type="text" name='Address_2' value="{{ cont.address_2 }}"  required>
+        </div>
+        <div>
+            <label for="City">City: </label>
+            <input type="text" name='City' value="{{ cont.city }}" required>
+        </div>
+        <div>
+            <label for="Pin">Pin: </label>
+            <input type="text" name='Pin' value="{{ cont.pin }}" required>
+        </div>
+        <div>
+            <label for="Phone">Phone: </label>
+            <input type="text" name='Phone' value="{{ cont.phone }}" required>
+        </div>
+        <input type="submit" value="Update">
+    </form>
+
+</div>
+    <a href="{% url 'restindex' %}">Menu</a>
+    <a href="{% url 'order' %}">order </a>
