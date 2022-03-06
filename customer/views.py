@@ -23,7 +23,7 @@ def custorder(request):
         cust_id = request.POST['customid']
         item = request.POST['item']
         price= request.POST['price']
-        if Order.objects.exists():
+        if Order.objects.filter(uid=uid).exists():
             a=Order.objects.filter(uid=uid).order_by('order_no')[0]
             c = Order(uid=uid,order_no=((a.order_no)+1),cust_id=cust_id,item=item,price=price,status=status)
             c.save()

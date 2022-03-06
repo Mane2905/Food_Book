@@ -41,14 +41,17 @@ def menu(request):
 def order(request):
     if request.method=="POST":
         order_no=request.POST['order_no']
-        a = Order.objects.filter(uid=request.user.id).filter(order_no=order_no)
-        print(a[0])
-        a[0].status="Accepted"
+        a = Order.objects.filter(uid=request.user.id).filter(order_no=order_no)[0]
+        c = Order(uid=a.uid,order_no=a.order_no,cust_id=a.cust_id,item=a.item,price=a.price,status="Accepted")
+        c.save()
+        a.delete()
+        
           
     contents=Order.objects.filter(uid=request.user.id).order_by('order_no')
-    print(contents[0].status)
+    stat = "Placed"
     context={
         'contents':contents,
+        
     }
     
     return render(request,'restaurant/order.html',context)
