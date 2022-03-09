@@ -2,11 +2,7 @@
 from django.shortcuts import render
 from .models import Menu,Restaurant,Order
 # Create your views here.
-<<<<<<< HEAD
 def index_rest(request):
-=======
-def index(request):
->>>>>>> dee17ae37cd145b15c0b16ca4915060bd0735f21
     if request.method=="POST":
         if Restaurant.objects.filter(uid = request.user.id).exists():
             a = Restaurant.objects.get(uid = request.user.id)
@@ -21,7 +17,6 @@ def index(request):
         c = Restaurant(hotel=hotel,uid = uid,address_1=address_1,address_2=address_2,city=city,pin=pin,phone=phone)
         c.save()
     address = Restaurant.objects.filter(uid=request.user.id)
-<<<<<<< HEAD
     if Restaurant.objects.filter(uid = request.user.id).exists():
         context={
             'cont':address[0],
@@ -30,11 +25,6 @@ def index(request):
         context={
             'cont':address
         }
-=======
-    context={
-        'cont':address[0],
-    }
->>>>>>> dee17ae37cd145b15c0b16ca4915060bd0735f21
     return render(request,'restaurant/index.html',context)
 def menu(request):
     contents=Menu.objects.order_by('-price').filter(uid=request.user.id)
