@@ -9,11 +9,6 @@ def register(request):
         email= request.POST['email']
         password= request.POST['password']
         account_type=request.POST['account_type']
-<<<<<<< HEAD
-=======
-        '''if account_type=="customer":
-            username=account_type+email'''
->>>>>>> dee17ae37cd145b15c0b16ca4915060bd0735f21
         if Account.objects.filter(email = email).exists():
             return redirect('register')
         else:
@@ -46,8 +41,3 @@ def login(request):
 
 def logout():
     return redirect('login')
-<<<<<<< HEAD
-=======
-def index(request):
-    return render(request,'account\index.html') 
->>>>>>> dee17ae37cd145b15c0b16ca4915060bd0735f21
