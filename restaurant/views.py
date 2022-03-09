@@ -45,10 +45,7 @@ def order(request):
         c = Order(uid=a.uid,order_no=a.order_no,cust_id=a.cust_id,item=a.item,price=a.price,status="Accepted")
         c.save()
         a.delete()
-        
-          
     contents=Order.objects.filter(uid=request.user.id).order_by('order_no')
-    stat = "Placed"
     context={
         'contents':contents,
         
