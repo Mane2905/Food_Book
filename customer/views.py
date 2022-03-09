@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from restaurant.models import Restaurant,Menu,Order
-from .models import Cart
+from .models import Cart,Rec_Order
 
 # Create your views here.
 def index(request):
@@ -25,6 +25,11 @@ def custorder(request):
         cust_id = request.POST['customid']
         item = request.POST['item']
         price= request.POST['price']
+        d=Rec_Order.objects.filter(cust_id=cust_id)
+        d.delete()
+        b = Restaurant.objects.filter(uid = uid)[0]
+        p = Rec_Order(uid=uid,name=b.hotel,order_no=1,cust_id=cust_id,item=item,price=price)
+        p.save()
         if Order.objects.filter(uid=uid).exists():
             a=Order.objects.filter(uid=uid).order_by('-order_no')[0]
             c = Order(uid=uid,order_no=((a.order_no)+1),cust_id=cust_id,item=item,price=price,status=status)
@@ -32,7 +37,7 @@ def custorder(request):
         else: 
             c = Order(uid=uid,order_no=1,cust_id=cust_id,item=item,price=price,status=status)
             c.save()
-    return render(request,'customer/order.html')
+    return redirect('last_order')
 
 def cart(request):
     if request.method=="POST":
@@ -54,7 +59,11 @@ def viewcart(request):
     if request.method=="POST":
         status=request.POST['status']
         a=Cart.objects.filter(cust_id=request.user.email)
+        d=Rec_Order.objects.filter(cust_id=request.user.email)
+        d.delete()
         for i in a:
+            p = Rec_Order(uid=i.uid,name=i.name,order_no=i.order_no,cust_id=i.cust_id,item=i.item,price=i.price)
+            p.save()
             if Order.objects.filter(uid=i.uid).exists():
                 b=Order.objects.filter(uid=i.uid).order_by('-order_no')[0]
                 c = Order(uid=i.uid,order_no=((b.order_no)+1),cust_id=i.cust_id,item=i.item,price=i.price,status=status)
@@ -62,6 +71,9 @@ def viewcart(request):
             else: 
                 c = Order(uid=i.uid,order_no=1,cust_id=i.cust_id,item=i.item,price=i.price,status=status)
                 c.save()
+        a.delete()
+        return redirect('last_order')
+        
     a=Cart.objects.filter(cust_id=request.user.email).order_by('order_no')
     context = {
         'contents':a
@@ -80,3 +92,10 @@ def delcart(request):
                 c.save()
                 i.delete()
     return redirect('viewcart')
+
+def last_order(request):
+    a = Rec_Order.objects.filter(cust_id = request.user.email).order_by('order_no')
+    context = {
+        'contents':a,
+    }
+    return render(request,'customer/last_order.html',context)

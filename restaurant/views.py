@@ -51,7 +51,6 @@ def order(request):
         c.save()
         a.delete()
     contents=Order.objects.filter(uid=request.user.id)#.order_by('order_no')
-    print(request.user.id)
     context={
         'contents':contents,
         
