@@ -1,0 +1,11 @@
+<div>
+    {% if contents %}
+        {% for i in contents %}
+            {{i.order_no}}  {{ i.name }}  {{ i.item }}  {{ i.price }} <br> 
+        {% endfor %}
+    {% else %}
+        <p>Nothing ordered yet</p>
+    {% endif %}
+</div>
+<a href="{% url 'viewcart' %}">View Cart</a>
+    <a href="{% url 'index' %}">Home</a>

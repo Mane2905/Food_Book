@@ -1,0 +1,23 @@
+<div>
+    {% if contents %}
+        {% for cont in contents %}
+            {{ cont.order_no }} {{ cont.name }} {{ cont.item }} {{ cont.price }}
+        
+            <form action="{% url 'delcart' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="order_no" value="{{ cont.order_no }}">
+                <input type="submit" value="Delete">
+            </form><br>
+            {% endfor %}
+        <form action="{% url 'viewcart' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name='status' value="Placed" required>
+            <input type="submit" value="Place Order">
+        </form>
+    {% else %}
+        <p>Cart is empty</p>
+    {% endif %}
+    
+    <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'last_order' %}">Last Order</a>
+</div>

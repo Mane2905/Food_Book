@@ -12,6 +12,18 @@
             <input type="hidden" name='status' value="Placed" required>
             <input type="submit" value="Place Order">
         </form>
+        <form action="{% url 'cart' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name='customid' value="{{ cust }}" required>
+            <input type="hidden" name='uid' value="{{ cont.uid }}" required>
+            <input type="hidden" name='item' value="{{ cont.item}}" required>
+            <input type="hidden" name='price' value="{{ cont.price}}" required>
+            <input type="hidden" name='status' value="Placed" required>
+            <input type="submit" value="Add to Cart">
+        </form>
         
     {% endfor %}
+    <a href="{% url 'viewcart' %}">View Cart</a>
+    <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'last_order' %}">Last Order</a>
 </div>
