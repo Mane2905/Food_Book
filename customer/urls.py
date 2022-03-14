@@ -7,4 +7,5 @@ urlpatterns=[
     path('cart',views.cart,name='cart'),
     path('viewcart',views.viewcart,name='viewcart'),
     path('delcart',views.delcart,name = 'delcart'),
-    path('last_order',views.last_order,name = 'last_order')]
+    path('last_order',views.last_order,name = 'last_order'),
+    path('address',views.address_cust,name= 'address')]

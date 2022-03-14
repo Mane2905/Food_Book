@@ -1,6 +1,18 @@
 from django.db import models
 
 # Create your models here.
+class Customer(models.Model):
+    uid = models.IntegerField(
+        blank=False
+    )
+    address_1 = models.TextField(blank=False)
+    address_2 = models.TextField(blank=False,default="")
+    city = models.TextField(blank=False)
+    pin= models.TextField(blank=False)
+    phone = models.TextField(blank=False)
+    def __int__(self):
+        return self.uid
+
 class Cart(models.Model):
     uid = models.IntegerField(blank=False)
     name = models.TextField(blank = False)

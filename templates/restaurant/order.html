@@ -1,20 +1,14 @@
 <div>
     {% if contents %}
         {% for cont in contents %}
-            <p>
+            <a href="{% url 'customer_order' cont.order_no %}"> <p>
                 {{ cont.order_no }}
                 {{ cont.cust_id }}
                 {{ cont.item }}
                 {{ cont.price }}
                 Order {{ cont.status }}
-            </p>
-            {% if cont.status == "Placed" %}
-                <form action="{% url 'order' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" value='{{ cont.order_no }}' name="order_no">
-                    <input type="submit" value="Accept">
-                </form>
-            {% endif %}
+            </p></a>
+            
         {% endfor %}
     {% else %}
             <p>No orders yet</p>

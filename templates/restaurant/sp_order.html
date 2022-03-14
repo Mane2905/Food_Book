@@ -1,0 +1,27 @@
+<p>
+    
+    {{ content.cust_id }} <br>
+    {{ content.item }} <br>
+    {{ content.price }} <br>
+    {{ content.address_1 }} <br>
+    {{ content.address_2 }} <br>
+    {{ content.city }} <br>
+    {{ content.pin }} <br>
+    {{ content.phone }} <br>
+    Order {{ content.status }}
+    {% if content.status == "Placed" %}
+        <form action="{% url 'order' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value='{{ content.order_no }}' name="order_no">
+            <input type="submit" value="Accept">
+        </form>
+    {% endif %}
+    {% if content.status == "Accepted" %}
+        <form action="{% url 'deliver' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value='{{ content.order_no }}' name="order_no">
+            <input type="submit" value="Delivered">
+        </form>
+    {% endif %}
+</p>
+<a href="{% url 'order' %}">Back to Orders </a>
