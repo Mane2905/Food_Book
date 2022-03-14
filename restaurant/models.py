@@ -10,7 +10,8 @@ class Restaurant(models.Model):
     pin= models.TextField(blank=False)
     phone = models.TextField(blank=False)
 
-    def __str__(self):
+
+    def __int__(self):
         return self.uid
 class Menu(models.Model):
     uid = models.IntegerField(
@@ -19,7 +20,7 @@ class Menu(models.Model):
     item = models.TextField(blank=False)
     price = models.TextField(blank=False,default="100")
 
-    def __str__(self):
+    def __int__(self):
         return self.uid
 class Order(models.Model):
     uid = models.IntegerField(blank=False)
@@ -28,5 +29,11 @@ class Order(models.Model):
     item = models.TextField(blank=False)
     price = models.TextField(blank=False,default="100")
     status = models.TextField(blank=False)
+    address_1 = models.TextField(blank=False)
+    address_2 = models.TextField(blank=False,default="")
+    city = models.TextField(blank=False)
+    pin= models.TextField(blank=False)
+    phone = models.TextField(blank=False)
+
     def __str__(self):
         return self.cust_id
